@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Setting; // Ensure the namespace is correct
 
 class SettingsController extends Controller
 {
     public function __construct() 
     {
-        // Ensure the 'admin' middleware exists and is properly defined
         $this->middleware('admin');
     }
 
@@ -34,7 +33,27 @@ class SettingsController extends Controller
      */
     public function update(Request $request)
     {
-        // Validate request data
+        // Check which action is being performed
+        $action = $request->input('action');
+
+        // Handle logo removal
+        if ($action === 'remove_logo') {
+            $settings = Setting::first();
+            if ($settings && $settings->logo) {
+                // Delete the logo from storage
+                $logoPath = public_path($settings->logo);
+                if (file_exists($logoPath)) {
+                    unlink($logoPath);
+                }
+                // Remove the logo path from the settings
+                $settings->logo = null;
+                $settings->save();
+                Session::flash('success', 'Logo removed.');
+            }
+            return redirect()->back();
+        }
+
+        // Handle settings update
         $validatedData = $request->validate([
             'site_name' => 'required|string',
             'contact_number' => 'required|string',
@@ -51,33 +70,25 @@ class SettingsController extends Controller
             'skype' => 'nullable|string',
             'footer_text1' => 'required|string',
             'footer_text2' => 'required|string',
-            'footer_text3' => 'required|string',
-            'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048' // Validation for logo upload
+            'footer_text3' => 'required|string'
         ]);
 
-        // Get the first settings record
-        $settings = Setting::first();
-
-        // Check if a logo file was uploaded
+        // Handle logo upload
         if ($request->hasFile('logo')) {
-            // Store the uploaded logo in the 'public/logos' directory
-            $logoPath = $request->file('logo')->store('logos', 'public');
-            
-            // Add the logo path to the validated data
-            $validatedData['logo'] = $logoPath;
-
-            // Optionally delete the old logo if it exists
-            if ($settings->logo) {
-                Storage::disk('public')->delete($settings->logo);
-            }
+            $logo = $request->file('logo');
+            $logoPath = $logo->move(public_path('uploads'), $logo->getClientOriginalName());
+            $validatedData['logo'] = 'uploads/' . $logo->getClientOriginalName();
         }
 
-        // Update settings with validated data
-        $settings->update($validatedData);
+        // Update or create the settings
+        $settings = Setting::first();
+        if (!$settings) {
+            $settings = new Setting();
+        }
+        $settings->fill($validatedData);
+        $settings->save();
 
-        // Flash a success message to the session
         Session::flash('success', 'Settings updated.');
-
         return redirect()->back();
     }
 }

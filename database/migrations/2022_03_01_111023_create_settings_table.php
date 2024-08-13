@@ -16,6 +16,7 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id'); // Primary key
             $table->string('site_name')->nullable(); // Site name, nullable if not always required
+            $table->text('logo')->nullable(); // Logo column, nullable
             $table->string('contact_number')->nullable(); // Contact number, nullable
             $table->string('contact_email')->nullable(); // Contact email, nullable
             $table->string('address')->nullable(); // Address, nullable
@@ -31,6 +32,7 @@ class CreateSettingsTable extends Migration
             $table->string('footer_text1')->nullable(); // Footer text 1, nullable
             $table->string('footer_text2')->nullable(); // Footer text 2, nullable
             $table->string('footer_text3')->nullable(); // Footer text 3, nullable
+            
             $table->timestamps(); // Timestamps
         });
     }

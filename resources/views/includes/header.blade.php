@@ -6,7 +6,11 @@
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" href="/">
-                        {{ $settings->site_name }}
+                        @if($settings->logo)
+                            <img src="{{ asset($settings->logo) }}" alt="{{ $settings->site_name }} Logo">
+                        @else
+                            {{ $settings->site_name }}
+                        @endif
                     </a>
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

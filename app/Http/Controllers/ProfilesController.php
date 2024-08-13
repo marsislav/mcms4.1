@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Correct import for Auth facade
-use Illuminate\Support\Facades\Session; // Correct import for Session facade
-use Illuminate\Support\Facades\Storage; // Correct import for Storage facade
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Profile; // Ensure Profile model is imported
 
 class ProfilesController extends Controller
 {
@@ -81,8 +82,15 @@ class ProfilesController extends Controller
         ]);
 
         $user = Auth::user(); // Retrieves the currently authenticated user
-        $profile = $user->profile;
 
+        // Ensure the profile exists or create a new one
+        $profile = $user->profile;
+        if (!$profile) {
+            $profile = new Profile();
+            $user->profile()->save($profile); // Save the new profile
+        }
+
+        // Handle the avatar file upload
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
             $avatar_new_name = time() . '_' . $avatar->getClientOriginalName();
@@ -92,7 +100,6 @@ class ProfilesController extends Controller
 
             // Update avatar path in the profile
             $profile->avatar = 'storage/avatars/' . $avatar_new_name;
-            $profile->save();
         }
 
         // Update user and profile data

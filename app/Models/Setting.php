@@ -21,6 +21,7 @@ class Setting extends Model
         'skype',
         'footer_text1',
         'footer_text2',
-        'footer_text3'
+        'footer_text3',
+        'logo'
     ];
 }

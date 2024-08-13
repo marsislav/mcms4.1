@@ -17,7 +17,7 @@ class CreatePagesTable extends Migration
             $table->bigIncrements('id'); // Auto-incrementing primary key
             $table->string('name'); // Column to store the page name
             $table->string('position'); // Column to store the page position
-            $table->text('content'); // Column to store the page content
+            $table->longtext('content'); // Column to store the page content
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

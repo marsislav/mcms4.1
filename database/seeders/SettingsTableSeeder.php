@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Setting;
 
 class SettingsTableSeeder extends Seeder
 {
@@ -13,12 +14,12 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Setting::create([
-            'site_name' => "mCMS 3.1",
+        Setting::create([
+            'site_name' => "mCMS 4.1",
             'address' => 'Bulgaria',
             'contact_number' => '+359 000 000 000',
             'contact_email' => 'info@example.com',
-            'site_info' => 'Sample mCMS 3.1 website',
+            'site_info' => 'Sample mCMS 4.1 website',
             'facebook' => '',
             'instagram' => '',
             'twitter' => '',

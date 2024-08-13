@@ -1,6 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Profile;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -11,20 +16,19 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = App\User::create([
+        $user = User::create([
             'name' => 'admin',
-            'email' => 'example@example.com',
-            'password' => bcrypt('password'),
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('password'),
             'admin' => 1
         ]);
 
-        App\Profile::create([
+        Profile::create([
             'user_id' => $user->id,
             'avatar' => 'uploads/avatars/1.png',
             'about' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, est veniam non corporis sunt quas voluptates eveniet perferendis repudiandae, voluptate natus optio eius reiciendis, placeat velit nemo molestiae fugiat fuga.',
             'facebook' => 'https://facebook.com',
             'youtube' => 'https://youtube.com'
         ]);
-
     }
 }

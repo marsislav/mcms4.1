@@ -112,13 +112,15 @@
                             <li class="list-group-item">
                                 <a href="{{ route('pfcategories') }}">Portfolio categories</a>
                             </li>
+                            <li class="list-group-item">
+                                    <a href="{{ route('settings') }}">Settings</a>
+                                </li>
+
                             @if (Auth::user()->admin)
                                 <li class="list-group-item">
                                     <a href="{{ route('users') }}">Users</a>
                                 </li>
-                                <li class="list-group-item">
-                                    <a href="{{ route('settings') }}">Settings</a>
-                                </li>
+                               
                             @endif
                             <li class="list-group-item">
                                 <a href="{{ route('user.profile') }}">My profile</a>

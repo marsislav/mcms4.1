@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Setting; // Ensure the namespace is correct
 
 class SettingsController extends Controller
@@ -50,11 +51,26 @@ class SettingsController extends Controller
             'skype' => 'nullable|string',
             'footer_text1' => 'required|string',
             'footer_text2' => 'required|string',
-            'footer_text3' => 'required|string'
+            'footer_text3' => 'required|string',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048' // Validation for logo upload
         ]);
 
         // Get the first settings record
         $settings = Setting::first();
+
+        // Check if a logo file was uploaded
+        if ($request->hasFile('logo')) {
+            // Store the uploaded logo in the 'public/logos' directory
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            
+            // Add the logo path to the validated data
+            $validatedData['logo'] = $logoPath;
+
+            // Optionally delete the old logo if it exists
+            if ($settings->logo) {
+                Storage::disk('public')->delete($settings->logo);
+            }
+        }
 
         // Update settings with validated data
         $settings->update($validatedData);

@@ -15,6 +15,13 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\SettingsController;
 
+
+//Fixes
+Route::get('/pages', [PagesController::class, 'index'])->name('pages.index');
+Route::get('/category', [PagesController::class, 'index'])->name('categories.index');
+Route::get('/tag', [PagesController::class, 'index'])->name('tags.index');
+Route::get('/pfcategory', [PagesController::class, 'index'])->name('pfcategories.index');
+
 // Public routes
 Route::get('/', [FrontEndController::class, 'index'])->name('index');
 Route::get('/login', [FrontEndController::class, 'login'])->name('login');

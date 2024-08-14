@@ -21,6 +21,7 @@ Route::get('/pages', [PagesController::class, 'index'])->name('pages.index');
 Route::get('/category', [PagesController::class, 'index'])->name('categories.index');
 Route::get('/tag', [PagesController::class, 'index'])->name('tags.index');
 Route::get('/pfcategory', [PagesController::class, 'index'])->name('pfcategories.index');
+Route::get('/user', [PagesController::class, 'index'])->name('users.index');
 
 // Public routes
 Route::get('/', [FrontEndController::class, 'index'])->name('index');

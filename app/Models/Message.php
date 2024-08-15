@@ -10,4 +10,5 @@ class Message extends Model
         'name', 'email', 'message'
         // Add other attributes that should be mass assignable
     ];
+    public $timestamps=true;
 }

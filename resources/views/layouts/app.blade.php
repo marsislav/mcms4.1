@@ -9,11 +9,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'mCMS 4.1') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+
     @yield('styles')
 
     <!-- Scripts -->
@@ -26,19 +26,28 @@
 
 <body>
     <div id="app">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if(session('info'))
+        <div class="alert alert-info">
+            {{ session('info') }}
+        </div>
+    @endif
+
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
+                   
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
@@ -48,7 +57,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp;sdrtrgfdhgfdg
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -147,20 +156,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
-     @if (Session::has('success'))
-    <script>
-       
-            toastr.success("{{ Session::get('success') }}");
-        
-        </script>
-        @endif
-        
-        @if (Session::has('info'))
-        <script>
-            toastr.info("{{ Session::get('info') }}"); 
-        </script>
-        @endif
+
    
 
     @yield('scripts')

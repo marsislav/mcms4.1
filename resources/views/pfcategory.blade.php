@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0051)https://demo.graygrids.com/themes/space/blog-1.html -->
 <html class="no-js" lang="">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{{ $title }}</title>
     <meta name="description" content="">
@@ -15,9 +13,7 @@
     <link rel="stylesheet" href="{{ asset('app/css/tiny-slider.css')}}">
     <link rel="stylesheet" href="{{ asset('app/css/glightbox.min.css')}}">
     <link rel="stylesheet" href="{{ asset('app/css/main.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-
-
+</head>
 <body>
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
@@ -40,7 +36,6 @@
         </div>
     </div>
 </div>
-
 
 <!--header-->
 @include('includes.header')
@@ -67,26 +62,25 @@
     </div>
 </section>
 
-
 <section class="blog-section pt-130">
     <div class="container">
         <div class="row">
             @foreach($pfcategory->pfposts as $pfpost)
                 <div class="col-xl-3">
                     <div class="row">
-
                         <div class="left-side-wrapper">
                             <div class="single-blog blog-style-2 mb-60 wow fadeInUp" data-wow-delay=".2s"
                                  style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                                 <div class="blog-img">
                                     <a href="{{ route('pfpost.single', ['slug' => $pfpost->slug ]) }}">
-                                        <img src="{{asset( $pfpost->featured)}}" alt="{{ $pfpost->title }}">
+                                        <img src="{{ asset($pfpost->featured) }}" alt="{{ $pfpost->title }}">
                                     </a>
                                 </div>
                                 <div class="blog-content">
-                                    <a href="{{ route('pfpost.single', ['slug' => $pfpost->slug ]) }}"><h4
-                                            class="case-item__title">{{ $pfpost->title }} </h4></a>
-                                    {!! str_limit($pfpost ->content, $limit = 150, $end = '...')!!}
+                                    <a href="{{ route('pfpost.single', ['slug' => $pfpost->slug ]) }}">
+                                        <h4 class="case-item__title">{{ $pfpost->title }}</h4>
+                                    </a>
+                                    {!! Illuminate\Support\Str::limit($pfpost->content, 150, '...') !!}
                                 </div>
                             </div>
                         </div>
@@ -94,10 +88,9 @@
                 </div>
             @endforeach
         </div>
-        <div class="description mb-60">{!!$pfcategory->description!!}</div>
-        
+        <div class="description mb-60">{!! $pfcategory->description !!}</div>
+    </div>
 </section>
-
 
 <section id="contact" class="contact-section cta-bg img-bg pt-110 pb-100">
     <div class="container">
@@ -118,26 +111,21 @@
 </section>
 
 <!-- Footer -->
-
 @include('includes.footer')
-
 <!-- End Footer -->
-
 
 <a href="#" class="scroll-top">
     <i class="lni lni-arrow-up"></i>
 </a>
-<script src="{{ asset('app/js/jquery-2.1.4.min.js')}}"></script>
-<script src="{{ asset('app/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{ asset('app/js/contact-form.js')}}"></script>
-<script src="{{ asset('app/js/count-up.min.js')}}"></script>
-<script src="{{ asset('app/js/tiny-slider.js')}}"></script>
-<script src="{{ asset('app/js/isotope.min.js')}}"></script>
-<script src="{{ asset('app/js/glightbox.min.js')}}"></script>
-<script src="{{ asset('app/js/wow.min.js')}}"></script>
-<script src="{{ asset('app/js/imagesloaded.min.js')}}"></script>
-<script src="{{ asset('app/js/main.js')}}"></script>
-<script src="{{ asset('js/toastr.min.js') }}"></script>
+<script src="{{ asset('app/js/jquery-2.1.4.min.js') }}"></script>
+<script src="{{ asset('app/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('app/js/contact-form.js') }}"></script>
+<script src="{{ asset('app/js/count-up.min.js') }}"></script>
+<script src="{{ asset('app/js/tiny-slider.js') }}"></script>
+<script src="{{ asset('app/js/isotope.min.js') }}"></script>
+<script src="{{ asset('app/js/glightbox.min.js') }}"></script>
+<script src="{{ asset('app/js/wow.min.js') }}"></script>
+<script src="{{ asset('app/js/imagesloaded.min.js') }}"></script>
+<script src="{{ asset('app/js/main.js') }}"></script>
 </body>
 </html>
-

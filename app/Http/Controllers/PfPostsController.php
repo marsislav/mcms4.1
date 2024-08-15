@@ -49,7 +49,7 @@ class PfPostsController extends Controller
             'completed_at' => 'required|date',
             'skills' => 'required|string',
             'client_url' => 'required|url',
-            'pfcategory_id' => 'required|exists:pf_categories,id'
+            'pfcategory_id' => 'required|exists:pfcategories,id'
         ]);
 
         $featured = $request->file('featured');
@@ -115,7 +115,7 @@ class PfPostsController extends Controller
             'completed_at' => 'required|date',
             'skills' => 'required|string',
             'client_url' => 'required|url',
-            'pfcategory_id' => 'required|exists:pf_categories,id'
+            'pfcategory_id' => 'required|exists:pfcategories,id'
         ]);
 
         $pfpost = PfPost::findOrFail($id);

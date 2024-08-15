@@ -47,7 +47,7 @@
 <!--/header-->
 
 <section class="page-banner-section pt-75 pb-75 img-bg"
-         style="background-image: url({{ asset('app/img/bg/common-bg.jpg')}})">
+         style="background-image: url('{{ asset('app/img/bg/common-bg.jpg') }}');">
     <div class="container">
         <div class="row">
             <div class="col-xl-12">

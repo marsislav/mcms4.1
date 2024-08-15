@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-        'name',
+        'name', 'email', 'message'
         // Add other attributes that should be mass assignable
     ];
 }

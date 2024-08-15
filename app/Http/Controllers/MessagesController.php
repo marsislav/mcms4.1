@@ -40,4 +40,16 @@ class MessagesController extends Controller
         $messages = Message::paginate(10); // Adjust the number per page as needed
         return view('admin.messages', compact('messages'));
     }
+
+    public function delete($id)
+    {
+        // Find the message by its ID
+        $message = Message::findOrFail($id);
+
+        // Delete the message
+        $message->delete();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Message deleted successfully!');
+    }
 }

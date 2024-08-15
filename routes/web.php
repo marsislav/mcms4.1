@@ -22,6 +22,9 @@ Route::get('/category', [PagesController::class, 'index'])->name('categories.ind
 Route::get('/tag', [PagesController::class, 'index'])->name('tags.index');
 Route::get('/pfcategory', [PagesController::class, 'index'])->name('pfcategories.index');
 Route::get('/user', [PagesController::class, 'index'])->name('users.index');
+Route::get('/pfpost', [PagesController::class, 'index'])->name('pfposts.index');
+Route::get('/posts', [PagesController::class, 'index'])->name('posts.index');
+
 
 // Public routes
 Route::get('/', [FrontEndController::class, 'index'])->name('index');
@@ -50,6 +53,10 @@ Route::get('/page/{id}', [FrontEndController::class, 'page'])->name('page.single
 Route::get('/tag/{id}', [FrontEndController::class, 'tag'])->name('tag.single');
 
 Route::post('/contact/submit', [MessagesController::class, 'submit']);
+//Messages
+
+Route::get('/messages', [MessagesController::class, 'getMessages'])->name('messages.index');
+Route::get('/messages/delete/{id}', [MessagesController::class, 'delete'])->name('messages.delete');
 
 // Authentication Routes
 Auth::routes();

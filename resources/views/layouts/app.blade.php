@@ -18,8 +18,10 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = @json(['csrfToken' => csrf_token()]);
-    </script>
+    window.Laravel = {
+        csrfToken: @json(csrf_token())
+    };
+</script>
 </head>
 
 <body>
@@ -146,14 +148,20 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
+     @if (Session::has('success'))
     <script>
-        @if (Session::has('success'))
+       
             toastr.success("{{ Session::get('success') }}");
+        
+        </script>
         @endif
+        
         @if (Session::has('info'))
-            toastr.info("{{ Session::get('info') }}");
+        <script>
+            toastr.info("{{ Session::get('info') }}"); 
+        </script>
         @endif
-    </script>
+   
 
     @yield('scripts')
 </body>

@@ -3327,3 +3327,32 @@ hr.green {
     opacity: 1;
     background: #1abc9c;
 }
+
+.navbar-brand:after {
+    content: "";
+    display: block;
+    background: white;
+    width: 150px;
+    height: 120px;
+    margin-left: -25px;
+    position: fixed;
+    z-index: -1;
+    border-radius: 50%;
+    margin-top: -70px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
+
+.stripped_content {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    height: 150px;
+}
+
+.cnt {
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    width: fit-content;
+}

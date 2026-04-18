@@ -13,13 +13,31 @@
                   <form action="{{ route('user.store') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
-                              <label for="name">User</label>
-                              <input type="text" name="name" class="form-control">
+                              <label for="name">Username</label>
+                              <input type="text" name="name" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                              <label for="name">Email</label>
-                              <input type="email" name="email" class="form-control">
+                              <label for="email">Email</label>
+                              <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                              <label for="password">Password</label>
+                              <input type="password" name="password" class="form-control" required minlength="8">
+                        </div>
+
+                        <div class="form-group">
+                              <label for="password_confirmation">Confirm Password</label>
+                              <input type="password" name="password_confirmation" class="form-control" required minlength="8">
+                        </div>
+
+                        <div class="form-group">
+                              <div class="checkbox">
+                                    <label>
+                                          <input type="checkbox" name="admin" value="1"> Administrator
+                                    </label>
+                              </div>
                         </div>
 
                         <div class="form-group">

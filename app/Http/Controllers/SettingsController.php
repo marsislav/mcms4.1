@@ -52,17 +52,42 @@ class SettingsController extends Controller
             'footer_text3'   => 'required|string',
             'homepage_type'  => 'required|in:posts,page',
             'homepage_id'    => 'nullable|exists:pages,id',
+            'mail_host'      => 'nullable|string',
+            'mail_port'      => 'nullable|string',
+            'mail_username'  => 'nullable|string',
+            'mail_password'  => 'nullable|string',
+            'mail_encryption'=> 'nullable|in:tls,ssl,',
+            'mail_from_address' => 'nullable|email',
         ]);
 
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logo->move(public_path('Uploads'), $logo->getClientOriginalName());
+            if (!is_dir(base_path('Uploads'))) { mkdir(base_path('Uploads'), 0775, true); }
+            $logo->move(base_path('Uploads'), $logo->getClientOriginalName());
             $validatedData['logo'] = 'Uploads/' . $logo->getClientOriginalName();
         }
 
         $settings = Setting::first() ?? new Setting();
         $settings->fill($validatedData);
         $settings->save();
+
+        // Write mail settings to .env so Laravel uses them
+        if ($request->filled('mail_username')) {
+            $envPath = base_path('.env');
+            $envContent = file_get_contents($envPath);
+            $updates = [
+                'MAIL_HOST'         => $request->mail_host ?? 'smtp.gmail.com',
+                'MAIL_PORT'         => $request->mail_port ?? '587',
+                'MAIL_USERNAME'     => $request->mail_username,
+                'MAIL_PASSWORD'     => $request->mail_password,
+                'MAIL_ENCRYPTION'   => $request->mail_encryption ?? 'tls',
+                'MAIL_FROM_ADDRESS' => $request->mail_from_address ?? $request->mail_username,
+            ];
+            foreach ($updates as $key => $value) {
+                $envContent = preg_replace('/^' . $key . '=.*/m', $key . '=' . $value, $envContent);
+            }
+            file_put_contents($envPath, $envContent);
+        }
 
         Session::flash('success', 'Settings updated.');
         return redirect()->back();

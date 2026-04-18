@@ -55,7 +55,8 @@ class PfPostsController extends Controller
 
         $featured = $request->file('featured');
         $featured_new_name = time() . '_' . $featured->getClientOriginalName();
-        $featured->move(public_path('Uploads/portfolio'), $featured_new_name);
+        if (!is_dir(base_path('Uploads/portfolio'))) { mkdir(base_path('Uploads/portfolio'), 0775, true); }
+        $featured->move(base_path('Uploads/portfolio'), $featured_new_name);
 
         $pfpost = PfPost::create([
             'title' => $request->title,
@@ -126,7 +127,8 @@ class PfPostsController extends Controller
         if ($request->hasFile('featured')) {
             $featured = $request->file('featured');
             $featured_new_name = time() . '_' . $featured->getClientOriginalName();
-            $featured->move(public_path('Uploads/portfolio'), $featured_new_name);
+            if (!is_dir(base_path('Uploads/portfolio'))) { mkdir(base_path('Uploads/portfolio'), 0775, true); }
+        $featured->move(base_path('Uploads/portfolio'), $featured_new_name);
             $pfpost->featured = 'Uploads/portfolio/' . $featured_new_name;
         }
 

@@ -127,7 +127,8 @@
                     {{-- Page selector --}}
                     <div class="form-group type-extra" id="extra-page">
                         <label>Select Page</label>
-                        <select name="reference_id" class="form-control">
+                        {{-- Renamed to reference_id_page to avoid conflict with other selectors --}}
+                        <select name="reference_id_page" id="reference_id_page" class="form-control ref-select">
                             <option value="">— choose —</option>
                             @foreach($pages as $page)
                                 <option value="{{ $page->id }}">{{ $page->name }}</option>
@@ -138,7 +139,8 @@
                     {{-- Category selector --}}
                     <div class="form-group type-extra" id="extra-category" style="display:none;">
                         <label>Select Category</label>
-                        <select name="reference_id" class="form-control">
+                        {{-- Renamed to reference_id_category to avoid conflict with other selectors --}}
+                        <select name="reference_id_category" id="reference_id_category" class="form-control ref-select">
                             <option value="">— choose —</option>
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -149,7 +151,8 @@
                     {{-- Post selector --}}
                     <div class="form-group type-extra" id="extra-post" style="display:none;">
                         <label>Select Post</label>
-                        <select name="reference_id" class="form-control">
+                        {{-- Renamed to reference_id_post to avoid conflict with other selectors --}}
+                        <select name="reference_id_post" id="reference_id_post" class="form-control ref-select">
                             <option value="">— choose —</option>
                             @foreach($posts as $post)
                                 <option value="{{ $post->id }}">{{ $post->title }}</option>
@@ -174,6 +177,8 @@
                         </select>
                     </div>
 
+                    {{-- Hidden field that receives the correct reference_id before submit --}}
+                    <input type="hidden" name="reference_id" id="reference_id_hidden">
                     <button type="submit" class="btn btn-success btn-block">+ Add to Menu</button>
                 </form>
             </div>
@@ -214,13 +219,39 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
 <script>
 // ── Type selector: show/hide relevant field ──────────────────────────────────
+// Map type value to the div id that should be shown
 const typeMap = { page: 'extra-page', category: 'extra-category', post: 'extra-post', custom: 'extra-custom' };
+
+// Map type value to the corresponding select id for reference_id
+const refSelectMap = { page: 'reference_id_page', category: 'reference_id_category', post: 'reference_id_post' };
+
+/**
+ * Updates the hidden reference_id field based on currently visible selector.
+ * This ensures only one reference_id value is submitted.
+ */
+function syncReferenceId(type) {
+    const hidden = document.getElementById('reference_id_hidden');
+    if (refSelectMap[type]) {
+        const sel = document.getElementById(refSelectMap[type]);
+        hidden.value = sel ? sel.value : '';
+        // Also update when the select changes
+        if (sel) {
+            sel.onchange = function() { hidden.value = this.value; };
+        }
+    } else {
+        hidden.value = '';
+    }
+}
+
 document.getElementById('item-type').addEventListener('change', function () {
     document.querySelectorAll('.type-extra').forEach(el => el.style.display = 'none');
     if (typeMap[this.value]) document.getElementById(typeMap[this.value]).style.display = '';
+    syncReferenceId(this.value);
 });
-// Init: show page selector by default
+
+// Init: show page selector by default and sync hidden field
 document.getElementById('extra-page').style.display = '';
+syncReferenceId('page');
 
 // ── SortableJS on main list ──────────────────────────────────────────────────
 const tree = document.getElementById('menu-tree');

@@ -142,6 +142,40 @@
                     </select>
                 </div>
 
+
+                <hr>
+                <h5 style="margin-bottom:15px;">📧 Email / SMTP Settings</h5>
+                <p class="text-muted small">Used for password reset emails. Configure with your email provider (Gmail, Mailgun, etc.)</p>
+
+                <div class="form-group">
+                    <label>SMTP Host</label>
+                    <input type="text" name="mail_host" class="form-control" value="{{ $settings->mail_host ?? 'smtp.gmail.com' }}" placeholder="smtp.gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>SMTP Port</label>
+                    <input type="text" name="mail_port" class="form-control" value="{{ $settings->mail_port ?? '587' }}" placeholder="587">
+                </div>
+                <div class="form-group">
+                    <label>SMTP Username (your email)</label>
+                    <input type="text" name="mail_username" class="form-control" value="{{ $settings->mail_username ?? '' }}" placeholder="yourname@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>SMTP Password</label>
+                    <input type="password" name="mail_password" class="form-control" value="{{ $settings->mail_password ?? '' }}" placeholder="App password or SMTP password">
+                </div>
+                <div class="form-group">
+                    <label>Encryption</label>
+                    <select name="mail_encryption" class="form-control">
+                        <option value="tls" {{ ($settings->mail_encryption ?? 'tls') === 'tls' ? 'selected' : '' }}>TLS (port 587)</option>
+                        <option value="ssl" {{ ($settings->mail_encryption ?? '') === 'ssl' ? 'selected' : '' }}>SSL (port 465)</option>
+                        <option value="" {{ ($settings->mail_encryption ?? 'tls') === '' ? 'selected' : '' }}>None</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>From Address</label>
+                    <input type="email" name="mail_from_address" class="form-control" value="{{ $settings->mail_from_address ?? '' }}" placeholder="no-reply@yoursite.com">
+                </div>
+
                 <div class="form-group">
                     <div class="text-center">
                         <button class="btn btn-success" type="submit" name="action" value="update_settings">

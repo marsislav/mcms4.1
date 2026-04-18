@@ -1,0 +1,5 @@
+# Allow direct access to uploaded files
+Options -Indexes
+<FilesMatch "\.(php|php5|phtml)$">
+    deny from all
+</FilesMatch>

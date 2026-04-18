@@ -45,19 +45,21 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email'
+            'name'                  => 'required|string|max:255',
+            'email'                 => 'required|email|unique:users,email',
+            'password'              => 'required|string|min:8|confirmed',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt('password') // Consider using a generated password or asking the user to set one
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => bcrypt($request->password),
+            'admin'    => $request->has('admin') ? 1 : 0,
         ]);
 
         Profile::create([
             'user_id' => $user->id,
-            'avatar' => 'uploads/avatars/1.png'
+            'avatar'  => 'Uploads/avatars/1.png'
         ]);
 
         Session::flash('success', 'User added successfully.');

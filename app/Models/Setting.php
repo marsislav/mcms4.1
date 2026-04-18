@@ -12,6 +12,7 @@ class Setting extends Model
         'linkedin', 'vkontakte', 'youtube', 'skype',
         'footer_text1', 'footer_text2', 'footer_text3',
         'homepage_type', 'homepage_id',
+        'mail_host', 'mail_port', 'mail_username', 'mail_password', 'mail_encryption', 'mail_from_address',
     ];
 
     public function homePage()

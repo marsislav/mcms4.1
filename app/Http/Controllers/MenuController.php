@@ -30,10 +30,24 @@ class MenuController extends Controller
 
         $count = MenuItem::whereNull('parent_id')->count();
 
+        // reference_id comes from a hidden field populated by JS.
+        // Fallback: also accept type-specific fields (reference_id_page etc.)
+        // in case JS didn't fire (e.g. form submitted without JS).
+        $referenceId = null;
+        if ($request->filled('reference_id')) {
+            $referenceId = (int) $request->reference_id;
+        } elseif ($request->type === 'page' && $request->filled('reference_id_page')) {
+            $referenceId = (int) $request->reference_id_page;
+        } elseif ($request->type === 'category' && $request->filled('reference_id_category')) {
+            $referenceId = (int) $request->reference_id_category;
+        } elseif ($request->type === 'post' && $request->filled('reference_id_post')) {
+            $referenceId = (int) $request->reference_id_post;
+        }
+
         MenuItem::create([
             'label'        => $request->label,
             'type'         => $request->type,
-            'reference_id' => $request->filled('reference_id') ? (int) $request->reference_id : null,
+            'reference_id' => $referenceId,
             'url'          => $request->filled('url') ? $request->url : null,
             'parent_id'    => $request->filled('parent_id') ? (int) $request->parent_id : null,
             'sort_order'   => $count,

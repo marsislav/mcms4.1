@@ -44,7 +44,8 @@ class PostsController extends Controller
 
         $featured = $request->file('featured');
         $featured_new_name = time() . '_' . $featured->getClientOriginalName();
-        $featured->move(public_path('Uploads/posts'), $featured_new_name);
+        if (!is_dir(base_path('Uploads/posts'))) { mkdir(base_path('Uploads/posts'), 0775, true); }
+        $featured->move(base_path('Uploads/posts'), $featured_new_name);
 
         // Generate unique slug
         $slug = $this->uniqueSlug(Str::slug($request->title), 'posts');
@@ -89,7 +90,8 @@ class PostsController extends Controller
         if ($request->hasFile('featured')) {
             $featured          = $request->file('featured');
             $featured_new_name = time() . '_' . $featured->getClientOriginalName();
-            $featured->move(public_path('Uploads/posts'), $featured_new_name);
+            if (!is_dir(base_path('Uploads/posts'))) { mkdir(base_path('Uploads/posts'), 0775, true); }
+        $featured->move(base_path('Uploads/posts'), $featured_new_name);
             $post->featured = 'Uploads/posts/' . $featured_new_name;
         }
 

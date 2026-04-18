@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Models; // Update the namespace for Laravel 8
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
     protected $fillable = [
-        'name', 'email', 'message'
-        // Add other attributes that should be mass assignable
+        'name', 'email', 'message', 'is_read'
     ];
-    public $timestamps=true;
+
+    public $timestamps = true;
 }

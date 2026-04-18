@@ -23,24 +23,71 @@
 
                     <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                         <ul id="nav" class="navbar-nav ms-auto">
-                            @foreach ($pages as $page)
+
+                            {{-- ✨ Dynamic Menu from Menu Builder --}}
+                            @if(isset($menuItems) && $menuItems->count() > 0)
+                                @foreach($menuItems as $item)
+                                    @if($item->children->count())
+                                        {{-- Dropdown item --}}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="{{ $item->resolveUrl() }}"
+                                               data-bs-toggle="dropdown" role="button">
+                                                {{ $item->label }}
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                @foreach($item->children as $child)
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ $child->resolveUrl() }}">
+                                                            {{ $child->label }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @else
+                                        {{-- Simple item --}}
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ $item->resolveUrl() }}">
+                                                {{ $item->label }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            @else
+                                {{-- Fallback: show pages (old behaviour) --}}
+                                @foreach($pages as $page)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('page.single', ['slug' => $page->slug]) }}">
+                                            {{ $page->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endif
+
+                            @if(Auth::check())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('page.single', ['id' => $page->id]) }}">
-                                        {{ $page->name }}
+                                    <a class="nav-link" href="{{ url('admin') }}">Admin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('admin/user/profile') }}">
+                                        {{ Auth::user()->name }}
                                     </a>
                                 </li>
-                            @endforeach
-
-                            @if (Auth::check())
-                                <li class="nav-item"><a class="nav-link" href="{{ url('admin') }}">Admin Dashboard</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url('admin/user/profile') }}">
-                                    {{ Auth::user()->name }}
-                                </a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}">Logout</a></li>
+                                <li class="nav-item">
+                                    <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="nav-link btn btn-link"
+                                                style="padding:0;border:none;background:none;cursor:pointer;">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
                             @else
-                                <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}">Login</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/login') }}">Login</a>
+                                </li>
                             @endif
+
                         </ul>
 
                         @include('includes.search')

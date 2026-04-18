@@ -1,24 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Messages</h1>
-    @if(count($messages) > 0)
-        @foreach($messages as $message)
-            <ul class="list-group">
-                <li class="list-group-item">Name: {{$message->name}}</li>
-                <li class="list-group-item">Email: {{$message->email}}</li>
-                <li class="list-group-item">Message: {{$message->message}}</li>
-                <li class="list-group-item">
-                    Sent At: {{ $message->created_at->setTimezone('Europe/Sofia')->format('Y-m-d H:i:s') }}
-                </li>
-                <li class="list-group-item">
-                    <form action="{{ route('messages.delete', $message->id) }}" method="GET" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                </li>
-            </ul>
-        @endforeach
-        {{ $messages->links() }} <!-- Add pagination links if needed -->
-    @endif
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">💬 Messages</h4>
+    <small class="text-muted">{{ $messages->total() }} total</small>
+</div>
+
+@if($messages->count() > 0)
+    @foreach($messages as $message)
+        <div class="panel panel-default">
+            <div class="panel-heading d-flex justify-content-between">
+                <span>
+                    <strong>{{ $message->name }}</strong>
+                    &mdash;
+                    <a href="mailto:{{ $message->email }}">{{ $message->email }}</a>
+                </span>
+                <small class="text-muted">
+                    {{ $message->created_at->setTimezone('Europe/Sofia')->format('d M Y, H:i') }}
+                </small>
+            </div>
+            <div class="panel-body">
+                <p class="mb-2">{{ $message->message }}</p>
+                {{-- ✨ Fixed: DELETE via POST form, not GET link --}}
+                <form action="{{ route('messages.delete', $message->id) }}" method="POST"
+                      onsubmit="return confirm('Delete this message?');">
+                    @csrf
+                    <button type="submit" class="btn btn-danger btn-xs">🗑 Delete</button>
+                </form>
+            </div>
+        </div>
+    @endforeach
+
+    {{ $messages->links() }}
+@else
+    <p class="text-muted text-center mt-4">No messages yet.</p>
+@endif
+
 @endsection

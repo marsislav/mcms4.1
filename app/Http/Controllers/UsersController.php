@@ -12,7 +12,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin')->except('logout');
     }
 
     /**
@@ -62,7 +62,7 @@ class UsersController extends Controller
 
         Session::flash('success', 'User added successfully.');
 
-        return redirect()->route('users.index'); // Ensure this matches your route name
+        return redirect()->route('users');
     }
 
     /**

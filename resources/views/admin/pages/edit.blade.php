@@ -37,15 +37,18 @@
                   </form>
             </div>
       </div>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+@stop
+
+@section('styles')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs4.min.css" rel="stylesheet">
 @stop
 
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs4.min.js"></script>
 <script>
-      $(document).ready(function() {
-            $('#content').summernote();
-      });
+    $(document).ready(function() {
+        $('#content').summernote({ height: 300 });
+    });
 </script>
 @stop
-

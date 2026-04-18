@@ -52,7 +52,7 @@
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('pfcategory.single', ['id' => $pfpost->pfcategory->id ]) }}">{{$pfpost->pfcategory->name}}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('pfcategory.single', ['slug' => $pfpost->pfcategory->slug]) }}">{{$pfpost->pfcategory->name}}</a></li>
                                 
                                 <li class="breadcrumb-item active" aria-current="page">{{$title}}</li>
                             </ol>

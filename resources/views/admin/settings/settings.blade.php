@@ -106,6 +106,42 @@
                     <input type="text" name="footer_text3" class="form-control" value="{{ $settings->footer_text3 }}">
                 </div>
 
+                {{-- ✨ Homepage selector --}}
+                <hr>
+                <h5 style="margin-bottom:15px;">🏠 Homepage Settings</h5>
+
+                <div class="form-group">
+                    <label>Homepage displays</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="homepage_type" value="posts"
+                                {{ ($settings->homepage_type ?? 'posts') === 'posts' ? 'checked' : '' }}>
+                            Latest Posts (default blog feed)
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="homepage_type" value="page"
+                                {{ ($settings->homepage_type ?? '') === 'page' ? 'checked' : '' }}>
+                            A static page
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="homepage-page-select"
+                     style="{{ ($settings->homepage_type ?? 'posts') === 'page' ? '' : 'display:none;' }}">
+                    <label>Select homepage page</label>
+                    <select name="homepage_id" class="form-control">
+                        <option value="">— choose a page —</option>
+                        @foreach($pages as $page)
+                            <option value="{{ $page->id }}"
+                                {{ ($settings->homepage_id ?? null) == $page->id ? 'selected' : '' }}>
+                                {{ $page->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <div class="text-center">
                         <button class="btn btn-success" type="submit" name="action" value="update_settings">
@@ -117,3 +153,15 @@
         </div>
     </div>
 @stop
+
+@section('scripts')
+<script>
+// Show/hide static page selector based on radio choice
+document.querySelectorAll('input[name="homepage_type"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        var sel = document.getElementById('homepage-page-select');
+        sel.style.display = this.value === 'page' ? '' : 'none';
+    });
+});
+</script>
+@endsection

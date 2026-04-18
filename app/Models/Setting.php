@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -6,22 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     protected $fillable = [
-        'site_name',
-        'address',
-        'contact_number',
-        'contact_email',
-        'site_info', 
-        'facebook',
-        'instagram',
-        'twitter',
-        'tiktok',
-        'linkedin',
-        'vkontakte',
-        'youtube',
-        'skype',
-        'footer_text1',
-        'footer_text2',
-        'footer_text3',
-        'logo'
+        'site_name', 'logo', 'contact_number', 'contact_email', 'address',
+        'site_info', 'facebook', 'instagram', 'twitter', 'tiktok',
+        'linkedin', 'vkontakte', 'youtube', 'skype',
+        'footer_text1', 'footer_text2', 'footer_text3',
+        'homepage_type', 'homepage_id',
     ];
+
+    public function homePage()
+    {
+        return $this->belongsTo(Page::class, 'homepage_id');
+    }
 }

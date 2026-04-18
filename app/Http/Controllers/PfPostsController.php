@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session; // Import the Session facade
 use Illuminate\Support\Str; // Import the Str facade
 use App\Models\PfCategory; // Use the correct namespace for PfCategory
-use App\Models\PfPost; // Use the correct namespace for PfPost
+use App\Models\PfPost;
+use App\Models\ActivityLog; // Use the correct namespace for PfPost
 
 class PfPostsController extends Controller
 {
@@ -54,7 +55,7 @@ class PfPostsController extends Controller
 
         $featured = $request->file('featured');
         $featured_new_name = time() . '_' . $featured->getClientOriginalName();
-        $featured->move(public_path('uploads/portfolio'), $featured_new_name);
+        $featured->move(public_path('Uploads/portfolio'), $featured_new_name);
 
         $pfpost = PfPost::create([
             'title' => $request->title,
@@ -64,14 +65,16 @@ class PfPostsController extends Controller
             'completed_at' => $request->completed_at,
             'skills' => $request->skills,
             'client_url' => $request->client_url,
-            'featured' => 'uploads/portfolio/' . $featured_new_name,
+            'featured' => 'Uploads/portfolio/' . $featured_new_name,
             'pfcategory_id' => $request->pfcategory_id,
             'slug' => Str::slug($request->title), // Use the Str facade for slug generation
         ]);
 
+        ActivityLog::log('created portfolio item', $request->title, '🖼️');
+
         Session::flash('success', 'Portfolio item created successfully.');
 
-        return redirect()->route('pfposts.index'); // Redirect to the index route
+        return redirect()->route('pfposts'); // Redirect to the index route
     }
 
     /**
@@ -123,8 +126,8 @@ class PfPostsController extends Controller
         if ($request->hasFile('featured')) {
             $featured = $request->file('featured');
             $featured_new_name = time() . '_' . $featured->getClientOriginalName();
-            $featured->move(public_path('uploads/portfolio'), $featured_new_name);
-            $pfpost->featured = 'uploads/portfolio/' . $featured_new_name;
+            $featured->move(public_path('Uploads/portfolio'), $featured_new_name);
+            $pfpost->featured = 'Uploads/portfolio/' . $featured_new_name;
         }
 
         $pfpost->update([
@@ -141,7 +144,7 @@ class PfPostsController extends Controller
 
         Session::flash('success', 'Portfolio item updated successfully.');
 
-        return redirect()->route('pfposts.index'); // Redirect to the index route
+        return redirect()->route('pfposts'); // Redirect to the index route
     }
 
     /**
@@ -200,6 +203,6 @@ class PfPostsController extends Controller
 
         Session::flash('success', 'Portfolio item restored successfully.');
 
-        return redirect()->route('pfposts.index'); // Redirect to the index route
+        return redirect()->route('pfposts'); // Redirect to the index route
     }
 }

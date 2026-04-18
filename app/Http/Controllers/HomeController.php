@@ -9,26 +9,28 @@ use App\Models\Page;
 use App\Models\PfPost;
 use App\Models\PfCategory;
 use App\Models\Tag;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        $recent_activity = ActivityLog::with('user')
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->get();
+
         return view('admin.dashboard')
-                    ->with('posts_count', Post::all()->count())
-                    ->with('pfposts_count', PfPost::all()->count())
-                    ->with('trashed_count', Post::onlyTrashed()->get()->count())
-                    ->with('pftrashed_count', PfPost::onlyTrashed()->get()->count())
-                    ->with('users_count', User::all()->count())
-                    ->with('pages_count', Page::all()->count())
-                    ->with('categories_count', Category::all()->count())
-                    ->with('tags_count', Tag::all()->count())
-                    ->with('pfcategories_count', PfCategory::all()->count());
+            ->with('posts_count',       Post::count())
+            ->with('pfposts_count',     PfPost::count())
+            ->with('trashed_count',     Post::onlyTrashed()->count())
+            ->with('pftrashed_count',   PfPost::onlyTrashed()->count())
+            ->with('users_count',       User::count())
+            ->with('pages_count',       Page::count())
+            ->with('categories_count',  Category::count())
+            ->with('tags_count',        Tag::count())
+            ->with('pfcategories_count',PfCategory::count())
+            ->with('recent_activity',   $recent_activity);
     }
 }

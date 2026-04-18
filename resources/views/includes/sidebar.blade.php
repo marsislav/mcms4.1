@@ -25,7 +25,7 @@
                             </span>
                             <p class="category">
                                 <i class="lni lni-folder"></i>
-                                <a href="{{ route('category.single', ['id' => $post->category->id]) }}">
+                                <a href="{{ route('category.single', ['slug' => $post->category->slug]) }}">
                                     {{ $post->category->name }}
                                 </a>
                             </p>
@@ -41,7 +41,7 @@
             <ul>
                 @foreach($categories as $category)
                     <li>
-                        <a href="{{ route('category.single', ['id' => $category->id]) }}">
+                        <a href="{{ route('category.single', ['slug' => $category->slug]) }}">
                             {{ $category->name }}
                         </a>
                     </li>
@@ -55,7 +55,7 @@
             <ul>
                 @foreach($tags as $tag)
                     <li>
-                        <a href="{{ route('tag.single', ['id' => $tag->id]) }}">
+                        <a href="{{ route('tag.single', ['slug' => $tag->slug]) }}">
                             {{ $tag->tag }}
                         </a>
                     </li>

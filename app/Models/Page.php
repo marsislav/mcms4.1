@@ -1,20 +1,32 @@
 <?php
 
-namespace App\Models; // Update the namespace for Laravel 8
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Page extends Model
 {
-    protected $fillable = [
-        'name', 'position', 'content'
-    ];
+    protected $fillable = ['name', 'slug', 'position', 'content'];
 
-    // Uncomment and update the following relationship if needed
-    /*
-    public function posts()
+    public static function boot()
     {
-        return $this->hasMany('App\Models\Post'); // Update the namespace for the related model
+        parent::boot();
+        static::creating(function ($model) {
+            if (empty($model->slug)) {
+                $model->slug = static::uniqueSlug(Str::slug($model->name));
+            }
+        });
     }
-    */
+
+    private static function uniqueSlug(string $slug): string
+    {
+        $original = $slug ?: 'page';
+        $count = 1;
+        $slug = $original;
+        while (static::where('slug', $slug)->exists()) {
+            $slug = $original . '-' . $count++;
+        }
+        return $slug;
+    }
 }

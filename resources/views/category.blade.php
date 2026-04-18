@@ -63,7 +63,7 @@
                                         </a>
                                         <div class="blog-meta">
                                             <span class="date"><i class="lni lni-calendar"></i> {{ $post->created_at->toFormattedDateString() }}</span>
-                                            <span class="category"><i class="lni lni-folder"></i> <a href="{{ route('category.single', ['id' => $category->id ]) }}">{{ $post->category->name }}</a></span>
+                                            <span class="category"><i class="lni lni-folder"></i> <a href="{{ route('category.single', ['slug' => $category->slug]) }}">{{ $post->category->name }}</a></span>
                                             <span class="category"><i class="lni lni-user"></i> {{ $post->user->name }}</span>
                                         </div>
                                         {!! \Illuminate\Support\Str::limit($post->content, 350, '...') !!}
@@ -86,7 +86,7 @@
                         <ul>
                             @foreach($categories as $category)
                                 <li>
-                                    <a href="{{ route('category.single', ['id' => $category->id ]) }}">{{ $category->name }}</a>
+                                    <a href="{{ route('category.single', ['slug' => $category->slug]) }}">{{ $category->name }}</a>
                                 </li>
                             @endforeach
                         </ul>

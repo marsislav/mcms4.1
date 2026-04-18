@@ -58,7 +58,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item" aria-current="page">Category</li>
                                 <li class="breadcrumb-item active" aria-current="page"><a
-                                        href="{{ route('category.single', ['id' => $post->category->id ]) }}">{{$post->category->name}}</a>
+                                        href="{{ route('category.single', ['slug' => $post->category->slug]) }}">{{$post->category->name}}</a>
                                 </li>
                             </ol>
                         </nav>
@@ -86,7 +86,7 @@
 
                                 <span class="date"><i class="lni lni-calendar"></i> {{ $post->created_at->toFormattedDateString() }}</span>
                                 <span class="category"><i class="lni lni-folder"></i> <a
-                                        href="{{ route('category.single', ['id' => $post->category->id ]) }}">{{ $post->category->name }}</a> </span>
+                                        href="{{ route('category.single', ['slug' => $post->category->slug]) }}">{{ $post->category->name }}</a> </span>
                                 <span class="category"><i class="lni lni-user"></i> {{ $post->user->name }} </span>
                             </div>
 
@@ -95,7 +95,7 @@
                         <div class="tags-box">
                             <ul>
                                 @foreach($post->tags as $tag)
-                                    <li><a href="{{ route('tag.single', ['id' => $tag->id ]) }}"
+                                    <li><a href="{{ route('tag.single', ['slug' => $tag->slug]) }}"
                                            class="w-tags-item">{{ $tag->tag }}</a></li>
                                 @endforeach
                             </ul>

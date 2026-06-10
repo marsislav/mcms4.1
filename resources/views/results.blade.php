@@ -4,7 +4,7 @@
 
       <div class="stunning-header stunning-header-bg-lightviolet">
             <div class="stunning-header-content">
-                  <h1 class="stunning-header-title">Search results: {{ $query }}</h1>
+                  <h1 class="stunning-header-title">Резултат от търсенето: {{ $query }}</h1>
             </div>
       </div>
 
@@ -30,7 +30,7 @@
                                                 </div>
                                           @else
                                                 <h1 class="text-center">
-                                                      No results found.
+                                                      Не са намерени резултати.
                                                 </h1>
                                           @endif
                               </div>

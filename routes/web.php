@@ -103,6 +103,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/category/edit/{id}',   [CategoriesController::class, 'edit'])->name('category.edit');
     Route::get('/category/delete/{id}', [CategoriesController::class, 'destroy'])->name('category.delete');
     Route::post('/category/update/{id}',[CategoriesController::class, 'update'])->name('category.update');
+    Route::get('/categories/search',    [CategoriesController::class, 'search'])->name('category.search');
 
     // Pages
     Route::get('/page/create',          [PagesController::class, 'create'])->name('page.create');

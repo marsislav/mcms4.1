@@ -25,11 +25,11 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="banner-content">
-                    <h2 class="text-white">Category: {{ $category->name }}</h2>
+                    <h2 class="text-white">Категория: {{ $category->name }}</h2>
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item" aria-current="page">Category</li>
+                                <li class="breadcrumb-item" aria-current="page">Категория</li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ $category->name }}</li>
                             </ol>
                         </nav>
@@ -40,71 +40,44 @@
     </div>
 </section>
 
-<section class="blog-section pt-130">
+<section class="blog-section pt-130 pb-130">
     <div class="container">
         <div class="row">
             <div class="col-xl-8 col-lg-7">
-                @foreach($category->posts as $post)
-                    <div class="left-side-wrapper">
-                        <div class="single-blog blog-style-2 mb-60 wow fadeInUp" data-wow-delay=".2s"
-                             style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                            <div class="row">
-                                <div class="col-xl-5"> 
-                                    <div class="blog-img">
-                                        <a href="{{ route('post.single', ['slug' => $post->slug ]) }}">
-                                            <img src="{{ asset($post->featured) }}" alt="{{ $post->title }}">
-                                        </a>
-                                    </div>
+                <div class="left-side-wrapper">
+                    @forelse($posts as $post)
+                        <div class="single-blog mb-50 wow fadeInUp" data-wow-delay=".2s">
+                            <div class="blog-img mb-25">
+                                <a href="{{ route('post.single', ['slug' => $post->slug]) }}">
+                                    <img src="{{ asset($post->featured) }}" alt="{{ $post->title }}" class="img-fluid w-100" style="border-radius:8px; max-height:320px; object-fit:cover;">
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta mb-10">
+                                    <span class="date"><i class="lni lni-calendar"></i> {{ $post->created_at->toFormattedDateString() }}</span>
+                                    <span class="ms-3"><i class="lni lni-folder"></i>
+                                        <a href="{{ route('category.single', ['slug' => $category->slug]) }}">{{ $post->category->name }}</a>
+                                    </span>
+                                    <span class="ms-3"><i class="lni lni-user"></i> {{ $post->user->name }}</span>
                                 </div>
-                                <div class="col-xl-7"> 
-                                    <div class="blog-content">
-                                        <a href="{{ route('post.single', ['slug' => $post->slug ]) }}">
-                                            <h4 class="case-item__title">{{ $post->title }}</h4>
-                                        </a>
-                                        <div class="blog-meta">
-                                            <span class="date"><i class="lni lni-calendar"></i> {{ $post->created_at->toFormattedDateString() }}</span>
-                                            <span class="category"><i class="lni lni-folder"></i> <a href="{{ route('category.single', ['slug' => $category->slug]) }}">{{ $post->category->name }}</a></span>
-                                            <span class="category"><i class="lni lni-user"></i> {{ $post->user->name }}</span>
-                                        </div>
-                                        {!! \Illuminate\Support\Str::limit($post->content, 350, '...') !!}
-                                    </div>
-                                </div>
+                                <a href="{{ route('post.single', ['slug' => $post->slug]) }}">
+                                    <h4 class="case-item__title mb-15">{{ $post->title }}</h4>
+                                </a>
+                                <p>{!! \Illuminate\Support\Str::limit(strip_tags($post->content), 250, '...') !!}</p>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                        <hr class="mb-50">
+                    @empty
+                        <p>Няма публикации в тази категория.</p>
+                    @endforelse
 
-            <div class="col-xl-4 col-lg-5">
-                <div class="sidebar-wrapper">
-                    <div class="sidebar-box search-form-box mb-30">
-                        @include('includes.search')
-                    </div>
-
-                    <div class="sidebar-box catagories-box mb-30">
-                        <h4>Categories</h4>
-                        <ul>
-                            @foreach($categories as $category)
-                                <li>
-                                    <a href="{{ route('category.single', ['slug' => $category->slug]) }}">{{ $category->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-
-                    <div class="sidebar-box mb-30">
-                        <h4>Follow On</h4>
-                        <div class="footer-social-links">
-                            <ul class="d-flex justify-content-start">
-                                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-twitter-filled"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-instagram-filled"></i></a></li>
-                            </ul>
-                        </div>
+                    <div class="mt-40">
+                        {{ $posts->links() }}
                     </div>
                 </div>
             </div>
+
+            @include('includes.sidebar')
         </div>
     </div>
 </section>
@@ -114,10 +87,8 @@
         <div class="row align-items-center">
             <div class="col-xl-6 col-lg-6">
                 <div class="section-title mb-30">
-                    <span class="text-white wow fadeInDown" data-wow-delay=".2s"
-                          style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Questions?</span>
-                    <h2 class="text-white mb-40 wow fadeInUp" data-wow-delay=".4s"
-                        style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Ask me!</h2>
+                    <span class="text-white wow fadeInDown" data-wow-delay=".2s">Имате въпроси?</span>
+                    <h2 class="text-white mb-40 wow fadeInUp" data-wow-delay=".4s">Пишете ми!</h2>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">

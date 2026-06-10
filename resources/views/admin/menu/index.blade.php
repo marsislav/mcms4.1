@@ -119,6 +119,7 @@
                             <option value="blog">🏠 Blog (homepage / latest posts)</option>
                             <option value="page">📄 Page</option>
                             <option value="category">📂 Category</option>
+                            <option value="pf_category">🖼 Portfolio Category</option>
                             <option value="post">📝 Post</option>
                             <option value="custom">🔗 Custom URL</option>
                         </select>
@@ -127,7 +128,6 @@
                     {{-- Page selector --}}
                     <div class="form-group type-extra" id="extra-page">
                         <label>Select Page</label>
-                        {{-- Renamed to reference_id_page to avoid conflict with other selectors --}}
                         <select name="reference_id_page" id="reference_id_page" class="form-control ref-select">
                             <option value="">— choose —</option>
                             @foreach($pages as $page)
@@ -139,7 +139,6 @@
                     {{-- Category selector --}}
                     <div class="form-group type-extra" id="extra-category" style="display:none;">
                         <label>Select Category</label>
-                        {{-- Renamed to reference_id_category to avoid conflict with other selectors --}}
                         <select name="reference_id_category" id="reference_id_category" class="form-control ref-select">
                             <option value="">— choose —</option>
                             @foreach($categories as $cat)
@@ -148,10 +147,20 @@
                         </select>
                     </div>
 
+                    {{-- Portfolio Category selector --}}
+                    <div class="form-group type-extra" id="extra-pf_category" style="display:none;">
+                        <label>Select Portfolio Category</label>
+                        <select name="reference_id_pf_category" id="reference_id_pf_category" class="form-control ref-select">
+                            <option value="">— choose —</option>
+                            @foreach($pfCategories as $pfCat)
+                                <option value="{{ $pfCat->id }}">{{ $pfCat->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     {{-- Post selector --}}
                     <div class="form-group type-extra" id="extra-post" style="display:none;">
                         <label>Select Post</label>
-                        {{-- Renamed to reference_id_post to avoid conflict with other selectors --}}
                         <select name="reference_id_post" id="reference_id_post" class="form-control ref-select">
                             <option value="">— choose —</option>
                             @foreach($posts as $post)
@@ -219,22 +228,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
 <script>
 // ── Type selector: show/hide relevant field ──────────────────────────────────
-// Map type value to the div id that should be shown
-const typeMap = { page: 'extra-page', category: 'extra-category', post: 'extra-post', custom: 'extra-custom' };
+const typeMap = {
+    page:        'extra-page',
+    category:    'extra-category',
+    pf_category: 'extra-pf_category',
+    post:        'extra-post',
+    custom:      'extra-custom'
+};
 
-// Map type value to the corresponding select id for reference_id
-const refSelectMap = { page: 'reference_id_page', category: 'reference_id_category', post: 'reference_id_post' };
+const refSelectMap = {
+    page:        'reference_id_page',
+    category:    'reference_id_category',
+    pf_category: 'reference_id_pf_category',
+    post:        'reference_id_post'
+};
 
-/**
- * Updates the hidden reference_id field based on currently visible selector.
- * This ensures only one reference_id value is submitted.
- */
 function syncReferenceId(type) {
     const hidden = document.getElementById('reference_id_hidden');
     if (refSelectMap[type]) {
         const sel = document.getElementById(refSelectMap[type]);
         hidden.value = sel ? sel.value : '';
-        // Also update when the select changes
         if (sel) {
             sel.onchange = function() { hidden.value = this.value; };
         }
@@ -263,7 +276,6 @@ if (tree) {
         group: 'menu',
     });
 
-    // Also make child lists sortable
     document.querySelectorAll('.children-list').forEach(ul => {
         new Sortable(ul, {
             handle: '.drag-handle',
@@ -282,7 +294,6 @@ document.getElementById('save-order-btn').addEventListener('click', function () 
     document.querySelectorAll('#menu-tree > li').forEach(function (li) {
         items.push({ id: li.dataset.id, parent_id: null, sort_order: sort++ });
 
-        // Children
         let childSort = 0;
         li.querySelectorAll('.children-list > li').forEach(function (child) {
             items.push({ id: child.dataset.id, parent_id: li.dataset.id, sort_order: childSort++ });

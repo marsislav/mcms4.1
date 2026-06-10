@@ -66,7 +66,7 @@
 
                             @if(Auth::check())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('admin') }}">Admin</a>
+                                    <a class="nav-link" href="{{ url('admin') }}">Администрация</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('admin/user/profile') }}">
@@ -78,13 +78,13 @@
                                         @csrf
                                         <button type="submit" class="nav-link btn btn-link"
                                                 style="padding:0;border:none;background:none;cursor:pointer;">
-                                            Logout
+                                            Изход
                                         </button>
                                     </form>
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/login') }}">Login</a>
+                                    <a class="nav-link" href="{{ url('/login') }}">Вход</a>
                                 </li>
                             @endif
 

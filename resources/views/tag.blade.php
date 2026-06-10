@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="banner-content">
-                        <h2 class="text-white">Tag: {{ $tag->tag }}</h2>
+                        <h2 class="text-white">Етикет(и): {{ $tag->tag }}</h2>
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -94,36 +94,7 @@
                     @endforeach
                 </div>
 
-                <div class="col-xl-4 col-lg-5">
-                    <div class="sidebar-wrapper">
-                        <div class="sidebar-box search-form-box mb-30">
-                            @include('includes.search')
-                        </div>
-
-                        <div class="sidebar-box catagories-box mb-30">
-                            <h4>Categories</h4>
-                            <ul>
-                                @foreach($categories as $category)
-                                    <li>
-                                        <a href="{{ route('category.single', ['slug' => $category->slug]) }}">{{ $category->name }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <div class="sidebar-box mb-30">
-                            <h4>Follow On</h4>
-                            <div class="footer-social-links">
-                                <ul class="d-flex justify-content-start">
-                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-filled"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-instagram-filled"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('includes.sidebar')
             </div>
         </div>
     </section>
@@ -133,8 +104,8 @@
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-6">
                     <div class="section-title mb-30">
-                        <span class="text-white wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Questions?</span>
-                        <h2 class="text-white mb-40 wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Ask me!</h2>
+                        <span class="text-white wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Имате въпроси?</span>
+                        <h2 class="text-white mb-40 wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Пишете ми!</h2>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6">

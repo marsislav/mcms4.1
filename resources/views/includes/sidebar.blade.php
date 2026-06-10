@@ -1,3 +1,9 @@
+@php
+    if (empty($recentPosts)) $recentPosts = \App\Models\Post::orderBy('created_at','DESC')->take(10)->get();
+    if (empty($categories))  $categories  = \App\Models\Category::take(5)->get();
+    if (empty($tags))        $tags        = \App\Models\Tag::all();
+    if (empty($settings))    $settings    = \App\Models\Setting::first();
+@endphp
 <div class="col-xl-4 col-lg-5">
     <div class="sidebar-wrapper">
         <!-- Search Form -->
@@ -8,7 +14,7 @@
         <!-- Recent Posts -->
         <div class="sidebar-box recent-blog-box mb-30">
             <h4>Последни публикации</h4>
-            @foreach($posts as $post)
+            @foreach($recentPosts as $post)
                 <div class="recent-blog-items">
                     <div class="recent-blog mb-30">
                         <div class="recent-blog-img">

@@ -8,16 +8,16 @@
                 {{ csrf_field() }}
                 
                 <div>
-                    {{ Form::text('name', old('name'), ['class' => 'form-control mb-3', 'placeholder' => 'Enter your name']) }}
+                    {{ Form::text('name', old('name'), ['class' => 'form-control mb-3', 'placeholder' => 'Въведете Вашите имена']) }}
                 </div>
                 <div>
-                    {{ Form::email('email', old('email'), ['class' => 'form-control mb-3', 'placeholder' => 'Enter your email address']) }}
+                    {{ Form::email('email', old('email'), ['class' => 'form-control mb-3', 'placeholder' => 'Въведете Вашият e-mail адрес']) }}
                 </div>
                 <div>
-                    {{ Form::textarea('message', old('message'), ['class' => 'form-control mb-3', 'placeholder' => 'Enter your message']) }}
+                    {{ Form::textarea('message', old('message'), ['class' => 'form-control mb-3', 'placeholder' => 'Въведете Вашето съобщение']) }}
                 </div>
                 <div>
-                    {{ Form::submit('Send', ['class' => 'theme-btn']) }}
+                    {{ Form::submit('Изпращане', ['class' => 'theme-btn']) }}
                 </div>
                 
                 {!! Form::close() !!}

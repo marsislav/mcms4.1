@@ -7,32 +7,31 @@ use Illuminate\Support\Facades\Session;
 use App\Models\MenuItem;
 use App\Models\Page;
 use App\Models\Category;
+use App\Models\PfCategory;
 use App\Models\Post;
 
 class MenuController extends Controller
 {
     public function index()
     {
-        $items      = MenuItem::whereNull('parent_id')->orderBy('sort_order')->with('children')->get();
-        $pages      = Page::orderBy('name')->get();
-        $categories = Category::orderBy('name')->get();
-        $posts      = Post::orderBy('title')->get();
+        $items        = MenuItem::whereNull('parent_id')->orderBy('sort_order')->with('children')->get();
+        $pages        = Page::orderBy('name')->get();
+        $categories   = Category::orderBy('name')->get();
+        $pfCategories = PfCategory::orderBy('name')->get();
+        $posts        = Post::orderBy('title')->get();
 
-        return view('admin.menu.index', compact('items', 'pages', 'categories', 'posts'));
+        return view('admin.menu.index', compact('items', 'pages', 'categories', 'pfCategories', 'posts'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'label' => 'required|string|max:100',
-            'type'  => 'required|in:page,category,post,blog,custom',
+            'type'  => 'required|in:page,category,pf_category,post,blog,custom',
         ]);
 
         $count = MenuItem::whereNull('parent_id')->count();
 
-        // reference_id comes from a hidden field populated by JS.
-        // Fallback: also accept type-specific fields (reference_id_page etc.)
-        // in case JS didn't fire (e.g. form submitted without JS).
         $referenceId = null;
         if ($request->filled('reference_id')) {
             $referenceId = (int) $request->reference_id;
@@ -40,6 +39,8 @@ class MenuController extends Controller
             $referenceId = (int) $request->reference_id_page;
         } elseif ($request->type === 'category' && $request->filled('reference_id_category')) {
             $referenceId = (int) $request->reference_id_category;
+        } elseif ($request->type === 'pf_category' && $request->filled('reference_id_pf_category')) {
+            $referenceId = (int) $request->reference_id_pf_category;
         } elseif ($request->type === 'post' && $request->filled('reference_id_post')) {
             $referenceId = (int) $request->reference_id_post;
         }

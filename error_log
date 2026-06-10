@@ -1,0 +1,115 @@
+[18-Apr-2026 14:10:23 UTC] PHP Warning:  require(/home/marsisla/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/marsisla/public_html/index.php on line 34
+[18-Apr-2026 14:10:23 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/marsisla/public_html/../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/marsisla/public_html/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/marsisla/public_html/index.php on line 34
+[06-Jun-2026 15:56:07 Europe/Sofia] PHP Fatal error:  Uncaught InvalidArgumentException: Please provide a valid cache path. in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36
+Stack trace:
+#0 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(88): Illuminate\View\Compilers\Compiler->__construct()
+#1 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(873): Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#2 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(758): Illuminate\Container\Container->build()
+#3 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(851): Illuminate\Container\Container->resolve()
+#4 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(694): Illuminate\Foundation\Application->resolve()
+#5 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(836): Illuminate\Container\Container->make()
+#6 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1419): Illuminate\Foundation\Application->make()
+#7 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(150): Illuminate\Container\Container->offsetGet()
+#8 [internal function]: Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#9 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Engines/EngineResolver.php(55): call_user_func()
+#10 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(310): Illuminate\View\Engines\EngineResolver->resolve()
+#11 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(274): Illuminate\View\Factory->getEngineFromPath()
+#12 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(146): Illuminate\View\Factory->viewInstance()
+#13 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php(85): Illuminate\View\Factory->make()
+#14 /home/marsisla/public_html/app/Exceptions/Handler.php(44): Illuminate\Routing\ResponseFactory->view()
+#15 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): App\Exceptions\Handler->render()
+#16 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(173): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#18 {main}
+  thrown in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php on line 36
+[06-Jun-2026 15:56:11 Europe/Sofia] PHP Fatal error:  Uncaught InvalidArgumentException: Please provide a valid cache path. in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36
+Stack trace:
+#0 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(88): Illuminate\View\Compilers\Compiler->__construct()
+#1 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(873): Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#2 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(758): Illuminate\Container\Container->build()
+#3 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(851): Illuminate\Container\Container->resolve()
+#4 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(694): Illuminate\Foundation\Application->resolve()
+#5 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(836): Illuminate\Container\Container->make()
+#6 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1419): Illuminate\Foundation\Application->make()
+#7 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(150): Illuminate\Container\Container->offsetGet()
+#8 [internal function]: Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#9 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Engines/EngineResolver.php(55): call_user_func()
+#10 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(310): Illuminate\View\Engines\EngineResolver->resolve()
+#11 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(274): Illuminate\View\Factory->getEngineFromPath()
+#12 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(146): Illuminate\View\Factory->viewInstance()
+#13 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php(85): Illuminate\View\Factory->make()
+#14 /home/marsisla/public_html/app/Exceptions/Handler.php(44): Illuminate\Routing\ResponseFactory->view()
+#15 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): App\Exceptions\Handler->render()
+#16 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(173): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#18 {main}
+  thrown in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php on line 36
+[06-Jun-2026 15:56:16 Europe/Sofia] PHP Fatal error:  Uncaught InvalidArgumentException: Please provide a valid cache path. in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36
+Stack trace:
+#0 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(88): Illuminate\View\Compilers\Compiler->__construct()
+#1 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(873): Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#2 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(758): Illuminate\Container\Container->build()
+#3 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(851): Illuminate\Container\Container->resolve()
+#4 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(694): Illuminate\Foundation\Application->resolve()
+#5 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(836): Illuminate\Container\Container->make()
+#6 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1419): Illuminate\Foundation\Application->make()
+#7 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(150): Illuminate\Container\Container->offsetGet()
+#8 [internal function]: Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#9 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Engines/EngineResolver.php(55): call_user_func()
+#10 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(310): Illuminate\View\Engines\EngineResolver->resolve()
+#11 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(274): Illuminate\View\Factory->getEngineFromPath()
+#12 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(146): Illuminate\View\Factory->viewInstance()
+#13 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php(85): Illuminate\View\Factory->make()
+#14 /home/marsisla/public_html/app/Exceptions/Handler.php(44): Illuminate\Routing\ResponseFactory->view()
+#15 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): App\Exceptions\Handler->render()
+#16 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(173): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#18 {main}
+  thrown in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php on line 36
+[06-Jun-2026 15:56:21 Europe/Sofia] PHP Fatal error:  Uncaught InvalidArgumentException: Please provide a valid cache path. in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36
+Stack trace:
+#0 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(88): Illuminate\View\Compilers\Compiler->__construct()
+#1 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(873): Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#2 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(758): Illuminate\Container\Container->build()
+#3 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(851): Illuminate\Container\Container->resolve()
+#4 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(694): Illuminate\Foundation\Application->resolve()
+#5 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(836): Illuminate\Container\Container->make()
+#6 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1419): Illuminate\Foundation\Application->make()
+#7 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(150): Illuminate\Container\Container->offsetGet()
+#8 [internal function]: Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#9 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Engines/EngineResolver.php(55): call_user_func()
+#10 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(310): Illuminate\View\Engines\EngineResolver->resolve()
+#11 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(274): Illuminate\View\Factory->getEngineFromPath()
+#12 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(146): Illuminate\View\Factory->viewInstance()
+#13 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php(85): Illuminate\View\Factory->make()
+#14 /home/marsisla/public_html/app/Exceptions/Handler.php(44): Illuminate\Routing\ResponseFactory->view()
+#15 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): App\Exceptions\Handler->render()
+#16 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(173): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#18 {main}
+  thrown in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php on line 36
+[06-Jun-2026 15:56:25 Europe/Sofia] PHP Fatal error:  Uncaught InvalidArgumentException: Please provide a valid cache path. in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36
+Stack trace:
+#0 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(88): Illuminate\View\Compilers\Compiler->__construct()
+#1 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(873): Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#2 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(758): Illuminate\Container\Container->build()
+#3 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(851): Illuminate\Container\Container->resolve()
+#4 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(694): Illuminate\Foundation\Application->resolve()
+#5 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(836): Illuminate\Container\Container->make()
+#6 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1419): Illuminate\Foundation\Application->make()
+#7 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(150): Illuminate\Container\Container->offsetGet()
+#8 [internal function]: Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#9 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Engines/EngineResolver.php(55): call_user_func()
+#10 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(310): Illuminate\View\Engines\EngineResolver->resolve()
+#11 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(274): Illuminate\View\Factory->getEngineFromPath()
+#12 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(146): Illuminate\View\Factory->viewInstance()
+#13 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php(85): Illuminate\View\Factory->make()
+#14 /home/marsisla/public_html/app/Exceptions/Handler.php(44): Illuminate\Routing\ResponseFactory->view()
+#15 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): App\Exceptions\Handler->render()
+#16 /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(173): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#18 {main}
+  thrown in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php on line 36

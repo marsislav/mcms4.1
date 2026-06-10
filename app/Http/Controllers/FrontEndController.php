@@ -21,11 +21,12 @@ class FrontEndController extends Controller
     {
         $settings = Setting::first();
         return [
-            'settings'   => $settings,
-            'categories' => Category::take(5)->get(),
-            'pages'      => Page::orderBy('position', 'asc')->take(5)->get(),
-            'tags'       => Tag::all(),
-            'menuItems'  => MenuItem::whereNull('parent_id')->orderBy('sort_order')->with('children')->get(),
+            'settings'    => $settings,
+            'categories'  => Category::take(5)->get(),
+            'pages'       => Page::orderBy('position', 'asc')->take(5)->get(),
+            'tags'        => Tag::all(),
+            'recentPosts' => Post::orderBy('created_at', 'DESC')->take(10)->get(),
+            'menuItems'   => MenuItem::whereNull('parent_id')->orderBy('sort_order')->with('children')->get(),
         ];
     }
 
@@ -36,7 +37,7 @@ class FrontEndController extends Controller
     {
         $settings = Setting::first();
 
-        // ✨ Homepage type: static page
+        // Homepage type: static page
         if ($settings && $settings->homepage_type === 'page' && $settings->homepage_id) {
             $page = Page::find($settings->homepage_id);
             if ($page) {
@@ -49,10 +50,10 @@ class FrontEndController extends Controller
 
         // Default: latest posts feed
         return view('index', array_merge($this->shared(), [
-            'title'       => $settings->site_name ?? config('app.name'),
-            'pfcategories'=> PfCategory::take(5)->get(),
-            'pfposts'     => PfPost::orderBy('created_at', 'DESC')->paginate(4),
-            'posts'       => Post::orderBy('created_at', 'DESC')->paginate(4),
+            'title'        => $settings->site_name ?? config('app.name'),
+            'pfcategories' => PfCategory::take(5)->get(),
+            'pfposts'      => PfPost::orderBy('created_at', 'DESC')->paginate(4),
+            'posts'        => Post::orderBy('created_at', 'DESC')->paginate(4),
         ]));
     }
 
@@ -78,6 +79,9 @@ class FrontEndController extends Controller
         return view('category', array_merge($this->shared(), [
             'category' => $category,
             'title'    => $category->name,
+            'posts'    => Post::where('category_id', $category->id)
+                              ->orderBy('created_at', 'DESC')
+                              ->paginate(6),
         ]));
     }
 

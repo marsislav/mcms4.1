@@ -10,8 +10,6 @@ class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,8 +19,6 @@ class CategoriesController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -31,9 +27,6 @@ class CategoriesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -47,40 +40,27 @@ class CategoriesController extends Controller
 
         Session::flash('success', 'You successfully created a category.');
 
-        return redirect()->route('categories.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        // Logic to show a single category
+        return redirect()->route('categories');
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * Route: GET /category/edit/{id}  →  name: category.edit
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
+        $category = Category::findOrFail($id);
         return view('admin.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * Route: POST /category/update/{id}  →  name: category.update
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
+        $category = Category::findOrFail($id);
+
         $request->validate([
             'name' => 'required|unique:categories,name,' . $category->id
         ]);
@@ -91,27 +71,43 @@ class CategoriesController extends Controller
 
         Session::flash('success', 'You successfully updated the category.');
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * Route: GET /category/delete/{id}  →  name: category.delete
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        $category = Category::findOrFail($id);
+
         if ($category->posts()->count() > 0) {
             Session::flash('info', 'ERROR! Category cannot be deleted because it has some posts.');
             return redirect()->back();
         }
 
-        $category->posts()->forceDelete(); // Delete associated posts if necessary
         $category->delete();
 
         Session::flash('success', 'You successfully deleted the category.');
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories');
+    }
+
+    /**
+     * AJAX search — returns JSON.
+     * Route: GET /admin/categories/search?q=...  →  name: category.search
+     */
+    public function search(Request $request)
+    {
+        $q = $request->input('q', '');
+
+        $categories = Category::when($q, function ($query) use ($q) {
+                $query->where('name', 'LIKE', '%' . $q . '%');
+            })
+            ->orderBy('name')
+            ->get(['id', 'name']);
+
+        return response()->json($categories);
     }
 }

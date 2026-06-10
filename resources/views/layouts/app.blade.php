@@ -115,6 +115,7 @@
                     </li>
                 </ul>
                 <ul class="list-group">
+                            <li class="list-group-item"><a href="{{ route('get.messages') }}">💬 Messages</a></li>
                     <li class="list-group-item"><a href="{{ route('posts') }}">📝 Posts</a></li>
                     <li class="list-group-item"><a href="{{ route('categories') }}">📂 Categories</a></li>
                     <li class="list-group-item"><a href="{{ route('tags') }}">🏷️ Tags</a></li>
@@ -123,6 +124,7 @@
                     <li class="list-group-item"><a href="{{ route('pfcategories') }}">🗂️ Portfolio Categories</a></li>
                     <li class="list-group-item"><a href="{{ route('settings') }}">⚙️ Settings</a></li>
                     <li class="list-group-item"><a href="{{ route('menu.index') }}">🧭 Menu Builder</a></li>
+            
                     @if(Auth::user()->admin)
                         <li class="list-group-item"><a href="{{ route('users') }}">👥 Users</a></li>
                     @endif
@@ -165,6 +167,9 @@ function fetchUnreadCount() {
 fetchUnreadCount();
 setInterval(fetchUnreadCount, 30000);
 </script>
+
+<h1 style="color:red; text-align:center; font-weight:800; margin:20px 0;">If YOU LIKE my WORK, then BUY me a BEER :)</h1>
+<img src="https://marsislav.net/revolut.png" style="display:block; margin:20px  auto 20px auto;">
 @endauth
 
 @yield('scripts')

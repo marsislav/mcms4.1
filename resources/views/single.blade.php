@@ -56,7 +56,7 @@
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item" aria-current="page">Category</li>
+                                <li class="breadcrumb-item" aria-current="page">Категория </li>
                                 <li class="breadcrumb-item active" aria-current="page"><a
                                         href="{{ route('category.single', ['slug' => $post->category->slug]) }}">{{$post->category->name}}</a>
                                 </li>
@@ -151,7 +151,7 @@
                     <div class="comments">
 
                         <div class="heading text-center">
-                            <h4 class="h1 heading-title">Comments</h4>
+                            <h4 class="h1 heading-title">Коментар(и)</h4>
                             <div class="heading-line">
                                 <span class="short-line"></span>
                                 <span class="long-line"></span>
@@ -174,9 +174,9 @@
             <div class="col-xl-6 col-lg-6">
                 <div class="section-title mb-30">
                     <span class="text-white wow fadeInDown" data-wow-delay=".2s"
-                          style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Questions?</span>
+                          style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Имате въпроси?</span>
                     <h2 class="text-white mb-40 wow fadeInUp" data-wow-delay=".4s"
-                        style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Ask me!</h2>
+                        style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Пишете ми!</h2>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">

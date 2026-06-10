@@ -14,9 +14,7 @@
     <link rel="stylesheet" href="{{ asset('app/css/main.css')}}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
-
 <body>
-    гггггггггггггггггггг
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 <![endif]-->
@@ -37,7 +35,6 @@
         </div>
     </div>
 </div>
-аааааааааааааааааааааааааааааааааа
 
 <!--header-->
 @include('includes.header')
@@ -55,18 +52,15 @@
     </div>
 </section>
 
-
 <section class="blog-section pt-130">
     <div class="container">
         <div class="row">
             <div class="col-xl-12">
                 <div class="left-side-wrapper">
                     <div class="single-blog blog-style-2 mb-60 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-
                         <div class="blog-content">
-                           <div class="actual_content">{!! $page->content !!}</div>
+                            <div class="actual_content">{!! $page->content !!}</div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -79,8 +73,8 @@
         <div class="row align-items-center">
             <div class="col-xl-6 col-lg-6">
                 <div class="section-title mb-30">
-                    <span class="text-white wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Questions?</span>
-                    <h2 class="text-white mb-40 wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Ask me!</h2>
+                    <span class="text-white wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Имате въпроси?</span>
+                    <h2 class="text-white mb-40 wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Пишете ми!</h2>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">
@@ -91,11 +85,8 @@
 </section>
 
 <!-- Footer -->
-
 @include('includes.footer')
-
 <!-- End Footer -->
-
 
 <a href="#" class="scroll-top">
     <i class="lni lni-arrow-up"></i>

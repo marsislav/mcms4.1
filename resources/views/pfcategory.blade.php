@@ -15,27 +15,6 @@
     <link rel="stylesheet" href="{{ asset('app/css/main.css')}}">
 </head>
 <body>
-<!--[if lte IE 9]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
-    your browser</a> to improve your experience and security.</p>
-<![endif]-->
-
-<div class="preloader" style="opacity: 0; display: none;">
-    <div class="loader">
-        <div class="spinner">
-            <div class="spinner-container">
-                <div class="spinner-rotator">
-                    <div class="spinner-left">
-                        <div class="spinner-circle"></div>
-                    </div>
-                    <div class="spinner-right">
-                        <div class="spinner-circle"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!--header-->
 @include('includes.header')
@@ -52,7 +31,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item" aria-current="page">Portfolio</li>
-                                <li class="breadcrumb-item active" aria-current="page">{{$pfcategory->name}}</li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $pfcategory->name }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -62,33 +41,31 @@
     </div>
 </section>
 
-<section class="blog-section pt-130">
+<section class="blog-section pt-130 pb-100">
     <div class="container">
         <div class="row">
             @foreach($pfcategory->pfposts as $pfpost)
-                <div class="col-xl-3">
-                    <div class="row">
-                        <div class="left-side-wrapper">
-                            <div class="single-blog blog-style-2 mb-60 wow fadeInUp" data-wow-delay=".2s"
-                                 style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                                <div class="blog-img">
-                                    <a href="{{ route('pfpost.single', ['slug' => $pfpost->slug ]) }}">
-                                        <img src="{{ asset($pfpost->featured) }}" alt="{{ $pfpost->title }}">
-                                    </a>
-                                </div>
-                                <div class="blog-content">
-                                    <a href="{{ route('pfpost.single', ['slug' => $pfpost->slug ]) }}">
-                                        <h4 class="case-item__title">{{ $pfpost->title }}</h4>
-                                    </a>
-                                    {!! Illuminate\Support\Str::limit($pfpost->content, 150, '...') !!}
-                                </div>
-                            </div>
+                <div class="col-md-6 col-xl-4 mb-60">
+                    <div class="single-blog blog-style-2 wow fadeInUp" data-wow-delay=".2s"
+                         style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <div class="blog-img">
+                            <a href="{{ route('pfpost.single', ['slug' => $pfpost->slug]) }}">
+                                <img src="{{ asset($pfpost->featured) }}" alt="{{ $pfpost->title }}" style="width:100%; height:220px; object-fit:cover;">
+                            </a>
+                        </div>
+                        <div class="blog-content" style="padding: 20px 0;">
+                            <a href="{{ route('pfpost.single', ['slug' => $pfpost->slug]) }}">
+                                <h4 class="case-item__title">{{ $pfpost->title }}</h4>
+                            </a>
+                            <p>{{ Illuminate\Support\Str::limit(strip_tags($pfpost->content), 120, '...') }}</p>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-        <div class="description mb-60">{!! $pfcategory->description !!}</div>
+        @if($pfcategory->description)
+            <div class="description mt-30">{!! $pfcategory->description !!}</div>
+        @endif
     </div>
 </section>
 
@@ -100,7 +77,7 @@
                     <span class="text-white wow fadeInDown" data-wow-delay=".2s"
                           style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Questions?</span>
                     <h2 class="text-white mb-40 wow fadeInUp" data-wow-delay=".4s"
-                        style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Ask me!</h2>
+                          style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Ask me!</h2>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">

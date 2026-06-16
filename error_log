@@ -113,3 +113,23 @@ Stack trace:
 #17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
 #18 {main}
   thrown in /home/marsisla/public_html/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php on line 36
+[16-Jun-2026 09:53:31 UTC] PHP Fatal error:  Uncaught Dotenv\Exception\InvalidFileException: Failed to parse dotenv file. Encountered unexpected whitespace at [gidi tnaj ecnq uxsy]. in /home/marsisla/public_html/vendor/vlucas/phpdotenv/src/Parser/Parser.php:30
+Stack trace:
+#0 /home/marsisla/public_html/vendor/graham-campbell/result-type/src/Error.php(119): Dotenv\Parser\Parser::Dotenv\Parser\{closure}()
+#1 /home/marsisla/public_html/vendor/vlucas/phpdotenv/src/Parser/Parser.php(29): GrahamCampbell\ResultType\Error->mapError()
+#2 /home/marsisla/public_html/vendor/vlucas/phpdotenv/src/Dotenv.php(222): Dotenv\Parser\Parser->parse()
+#3 /home/marsisla/public_html/errmiro.php(11): Dotenv\Dotenv->load()
+#4 {main}
+  thrown in /home/marsisla/public_html/vendor/vlucas/phpdotenv/src/Parser/Parser.php on line 30
+[16-Jun-2026 10:04:23 UTC] PHP Fatal error:  Uncaught Error: Class "Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport" not found in /home/marsisla/public_html/errmiro.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/marsisla/public_html/errmiro.php on line 18
+[16-Jun-2026 10:11:32 UTC] PHP Fatal error:  Uncaught Error: Class "Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport" not found in /home/marsisla/public_html/errmiro.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/marsisla/public_html/errmiro.php on line 18
+[16-Jun-2026 10:13:22 UTC] PHP Deprecated:  Callables of the form ["Swift_SmtpTransport", "Swift_Transport_EsmtpTransport::__construct"] are deprecated in /home/marsisla/public_html/vendor/swiftmailer/swiftmailer/lib/classes/Swift/SmtpTransport.php on line 36
+[16-Jun-2026 10:13:22 UTC] PHP Deprecated:  Callables of the form ["Swift_Message", "Swift_Mime_SimpleMessage::__construct"] are deprecated in /home/marsisla/public_html/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Message.php on line 46
+[16-Jun-2026 10:19:13 UTC] PHP Deprecated:  Callables of the form ["Swift_SmtpTransport", "Swift_Transport_EsmtpTransport::__construct"] are deprecated in /home/marsisla/public_html/vendor/swiftmailer/swiftmailer/lib/classes/Swift/SmtpTransport.php on line 36
+[16-Jun-2026 10:19:13 UTC] PHP Deprecated:  Callables of the form ["Swift_Message", "Swift_Mime_SimpleMessage::__construct"] are deprecated in /home/marsisla/public_html/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Message.php on line 46
